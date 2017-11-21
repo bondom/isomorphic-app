@@ -25,8 +25,8 @@ const universalLoader = function(req, res) {
                 <App initialData={initialData}/>
             </StaticRouter>
         );
-        console.log(markup);
-        res.status(200).send(htmlData.replace('{{SSR}}', markup).replace('__INITIAL_DATA__PLACEHOLDER__', JSON.stringify(initialData)));
+        const replacedHtmlData = htmlData.replace('{{SSR}}', markup).replace(/__INITIAL_DATA__PLACEHOLDER__/g, JSON.stringify(initialData));
+        res.status(200).send(replacedHtmlData);
     });
 };
 
@@ -49,7 +49,6 @@ app.use('/', (req, res, next) => {
     next();
 },
 universalLoader) ;
-
 
 
 module.exports = app;
