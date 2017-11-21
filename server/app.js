@@ -12,14 +12,24 @@ const app = express();
 const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
 
 
-const universalLoader = function(req, res) {
+const initData = (req,res,next) => {
+    let initialData = {};
+    if(req.originalUrl === "/" ) {
+        initialData = {qas: getQAs()};
+    }
 
+    res.locals.initialData = initialData;
+    next();
+}
+
+const universalLoader = (req, res) => {
     fs.readFile(filePath, 'utf8', (err, htmlData) => {
         if (err) {
             console.error('read err', err);
             return res.status(404).end()
         }
-        const initialData = {qas: getQAs()};
+
+        const initialData = res.locals.initialData;
         const markup = ReactDOMServer.renderToString(
             <StaticRouter location={req.url} context={{}}>
                 <App initialData={initialData}/>
@@ -38,7 +48,7 @@ const universalLoader = function(req, res) {
 
 
 //handle root url, if don't do this before static resources, page from build folder(just SPA) will be returned for root url
-app.get('/', universalLoader);
+app.get('/', initData, universalLoader);
 
 //handle static resources
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
@@ -48,6 +58,7 @@ app.use('/', (req, res, next) => {
     console.log("Request path different from root: " +  req.method + " " + req.url);
     next();
 },
+initData,
 universalLoader) ;
 
 
