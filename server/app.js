@@ -13,7 +13,7 @@ const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
 
 
 const universalLoader = function(req, res) {
-    console.log("Request to server: " +  req.method + " " + req.url);
+    //console.log("Request to server: " +  req.method + " " + req.url);
 
     fs.readFile(filePath, 'utf8', (err, htmlData) => {
         if (err) {
@@ -29,18 +29,26 @@ const universalLoader = function(req, res) {
     });
 };
 
-//handle root url, if don't do this, page from build folder(just SPA) will be returned
+//if we don't want to use ssr,
+//just ensures that refreshing pages with paths different from root one will return page
+/*app.get('/!*', function (req, res) {
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+});*/
+
+
+//handle root url, if don't do this before static resources, page from build folder(just SPA) will be returned for root url
 app.get('/', universalLoader);
 
 //handle static resources
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
-//if request passed previous middlewares, path is not home one, and it is not path of static resource
+//if request skipped previous middlewares, path is not home one, and it is not path of static resource
 app.use('/', (req, res, next) => {
-    console.log("Request to server2: " +  req.method + " " + req.url);
+    console.log("Request path different from root: " +  req.method + " " + req.url);
     next();
 },
 universalLoader) ;
+
 
 
 module.exports = app;
