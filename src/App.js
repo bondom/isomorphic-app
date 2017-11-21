@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
     Switch,
     Route,
     Link
 } from 'react-router-dom';
-import FrequentQuestions from 'pages/qa/QA';
+import QA from 'pages/qa/QA';
 import About from 'pages/about/About';
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
               <li><Link to="/about">About</Link></li>
           </ul>
           <Switch>
-              <Route exact path="/" component={FrequentQuestions}/>
+              <Route exact path="/" render={() => <QA initialQAs={this.props.initialData.qas}/>} />
               <Route path="/about" component={About}/>
           </Switch>
       </div>
@@ -24,4 +25,7 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+    initialData: PropTypes.object.isRequired
+}
 export default App;

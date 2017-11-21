@@ -12,9 +12,13 @@
   },
   "scripts": {
     "start": "cross-env NODE_PATH=./src react-scripts start",
-    "start:server": "cross-env NODE_ENV=development NODE_PATH=./src node server",
+    "start:server": "cross-env NODE_ENV=development NODE_PATH=./src nodemon --watch server --watch build server",
     "build": "cross-env NODE_PATH=./src react-scripts build",
     "test": "cross-env NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "forever": "^0.15.3",
+    "nodemon": "^1.12.1"
   }
 }

@@ -10,6 +10,15 @@ class QA extends Component {
         this.state = {qas: []};
     }
 
+    componentWillMount() {
+        console.log("will mount");
+        if(this.props.initialQAs) {
+            this.setState({qas: this.props.initialQAs.slice()});
+            console.log("Data were retrieved from server");
+            return;
+        }
+    }
+
     componentDidMount() {
         this.setState({qas: getQAs()});
     }
@@ -19,8 +28,8 @@ class QA extends Component {
             <div>
                 {
                     this.state.qas.map((qa,id) => {
-                        return <div>{qa.question} {qa.answer}</div>
-                        //return <QAItem qa={qa} id={id}/>
+                        return <div key={id}>{qa.question} {qa.answer}</div>
+                        //return <QAItem qa={qa} key={id}/>
                     })
                 }
             </div>
@@ -28,5 +37,7 @@ class QA extends Component {
     }
 }
 
-QA.propTypes = {};
+QA.propTypes = {
+    initialQAs: PropTypes.array
+};
 export default QA;

@@ -6,7 +6,7 @@ const ReactDOMServer = require('react-dom/server');
 const { StaticRouter } = require('react-router-dom');
 const {default: App} = require('../src/App');
 const {default: render} = require('./render'); //TODO: delete or adopt
-
+import { getQAs } from '../src/actions/qa';
 const app = express();
 
 const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
@@ -19,12 +19,14 @@ const universalLoader = function(req, res) {
             console.error('read err', err);
             return res.status(404).end()
         }
+        const initialData = {qas: getQAs()};
         const markup = ReactDOMServer.renderToString(
             <StaticRouter location={req.url} context={{}}>
-                <App/>
+                <App initialData={initialData}/>
             </StaticRouter>
         );
-        res.status(200).send(htmlData.replace('{{SSR}}', markup).replace('{INITIAL_DATA}', JSON.stringify({bio: "Panamera"})));
+        console.log(markup);
+        res.status(200).send(htmlData.replace('{{SSR}}', markup).replace('__INITIAL_DATA__PLACEHOLDER__', JSON.stringify(initialData)));
     });
 };
 
