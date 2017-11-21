@@ -18,4 +18,4 @@ const render = (Component) => {
 }
 
 render(App);
-registerServiceWorker();
+//registerServiceWorker();
