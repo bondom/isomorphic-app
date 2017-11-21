@@ -4,7 +4,7 @@ import {
     Route,
     Link
 } from 'react-router-dom';
-import FrequentQuestions from 'pages/frequent-questions/FrequentQuestions';
+import FrequentQuestions from 'pages/qa/QA';
 import About from 'pages/about/About';
 
 class App extends Component {

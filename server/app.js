@@ -5,7 +5,7 @@ const fs = require('fs')
 const ReactDOMServer = require('react-dom/server');
 const { StaticRouter } = require('react-router-dom');
 const {default: App} = require('../src/App');
-const {default: render} = require('./render');
+const {default: render} = require('./render'); //TODO: delete or adopt
 
 const app = express();
 
@@ -13,7 +13,6 @@ const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
 
 
 const universalLoader = function(req, res) {
-    //console.log("Request to server: " +  req.method + " " + req.url);
 
     fs.readFile(filePath, 'utf8', (err, htmlData) => {
         if (err) {
@@ -25,7 +24,7 @@ const universalLoader = function(req, res) {
                 <App/>
             </StaticRouter>
         );
-        res.status(200).send(htmlData.replace('{{SSR}}', markup));
+        res.status(200).send(htmlData.replace('{{SSR}}', markup).replace('{INITIAL_DATA}', JSON.stringify({bio: "Panamera"})));
     });
 };
 

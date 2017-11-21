@@ -8,10 +8,15 @@ import {
     BrowserRouter
 } from 'react-router-dom'
 
+const initialData = window.__INITIAL_DATA__;
+console.log("Initial data: " + initialData);
+
+delete window.__INITIAL_DATA__;
+
 const render = (Component) => {
     ReactDOM.render(
         <BrowserRouter>
-            <Component />
+            <Component initialData={initialData}/>
         </BrowserRouter>,
         document.getElementById('root')
     );
