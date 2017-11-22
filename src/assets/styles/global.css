@@ -1,5 +1,104 @@
+/*Reset*/
+* {
+  /*border and padding will be included in width and height of elements*/
+  box-sizing: border-box;
+  min-height: 0;
+  min-width: 0;
+}
+
+html {
+  height: 100%;
+  font-size: 14px;
+}
+
 body {
-  margin: 0;
+  height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 0;
+  overflow-x: hidden;
   font-family: sans-serif;
 }
+
+
+section, article, aside, main, nav {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p, h1, h2, h3, h4, h5, h6  {
+  margin: 0;
+}
+
+#root {
+  height:100%;
+}
+
+.page-wrapper {
+  min-height: 100%;
+  margin: 0 auto;
+  width: 980px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+}
+
+/*
+1. Reset
+2. Em, rem,
+
+  em - is computed relatively to current font size
+       1em = current font-size
+  rem - is computed relatively to font size of html element
+
+
+3. inline or block: span, a, strong, em, img, br, input, abbr, acronym
+   block: div, h1...h6, p, ul, li, table, blockquote, pre, form
+
+4. BEM
+
+  <form class="form form--theme-xmas form--simple">
+  <input class="form__input" type="text" />
+  <input
+    class="form__submit form__submit--disabled"
+    type="submit" />
+  </form>
+
+  .form { } - BEM-block
+  .form--theme-xmas { } - BEM-modifier
+  .form--simple { }
+  .form__input { } - BEM-element
+  .form__submit { }
+  .form__submit--disabled { }
+
+  Rules: Unlike DOM, BEM tree is flat
+
+  <div class="promo">
+    <div class="promo__description">
+      Good!
+      <a class="promo__link" href="">...</a>
+    </div>
+  </div>
+
+  <div class="promo">
+    <div class="promo__description">
+      BAD! <!--ОШИБКА: попытка прописать иерархию -->
+      <a class="promo__description__link" href="">...</a>
+    </div>
+  </div>
+*/

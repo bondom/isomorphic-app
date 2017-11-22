@@ -6,7 +6,11 @@ const ReactDOMServer = require('react-dom/server');
 const { StaticRouter } = require('react-router-dom');
 const {default: App} = require('../src/App');
 const {default: render} = require('./render'); //TODO: delete or adopt
+
+
 import { getQAs } from '../src/actions/qa';
+import serialize from 'serialize-javascript'; //to prevent XSS attacks
+
 const app = express();
 
 const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
@@ -15,7 +19,7 @@ const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
 const initData = (req,res,next) => {
     let initialData = {};
     if(req.originalUrl === "/" ) {
-        initialData = {qas: getQAs()};
+        initialData = {qas: getQAs(), dangerScript: "<script>console.log('Danger!!!')</script>"};
     }
 
     res.locals.initialData = initialData;
@@ -35,7 +39,7 @@ const universalLoader = (req, res) => {
                 <App initialData={initialData}/>
             </StaticRouter>
         );
-        const replacedHtmlData = htmlData.replace('{{SSR}}', markup).replace(/__INITIAL_DATA__PLACEHOLDER__/g, JSON.stringify(initialData));
+        const replacedHtmlData = htmlData.replace('{{SSR}}', markup).replace(/__INITIAL_DATA__PLACEHOLDER__/g, serialize(initialData));
         res.status(200).send(replacedHtmlData);
     });
 };
