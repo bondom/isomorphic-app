@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
     Switch,
     Route,
-    Link
+    Link,
+    withRouter
 } from 'react-router-dom';
 import QA from 'pages/qa/QA';
 import About from 'pages/about/About.jsx';
@@ -11,23 +12,33 @@ import './App.css';
 
 class App extends Component {
   render() {
+    const currentRoute = this.props.location.pathname;
+    const linkClassName = (path) => `${currentRoute === path ? 'nav-bar__link nav-bar__link--chosen' : 'nav-bar__link'}`;
     return (
-        <div className="page-wrapper">
+        <div className="page">
           <div className="content">
-              <nav>
-                  <ul>
-                      <li><Link to="/">Home</Link></li>
-                      <li><Link to="/about">About</Link></li>
-                  </ul>
-              </nav>
-              <Switch>
-                  <Route exact path="/" render={() => <QA initialQAs={this.props.initialData.qas}/>} />
-                  <Route path="/about" component={About}/>
-              </Switch>
+              <div className="nav-bar-wrapper">
+                  <nav className="nav-bar">
+                      <ul className="nav-bar__links">
+                          <li className={linkClassName("/")}><Link to="/">Home</Link></li>
+                          <li className={linkClassName("/about")}><Link to="/about">About</Link></li>
+                      </ul>
+                  </nav>
+              </div>
+              <div className="main-wrapper">
+                  <div className="main">
+                      <Switch>
+                          <Route exact path="/" render={() => <QA initialQAs={this.props.initialData.qas}/>} />
+                          <Route path="/about" component={About}/>
+                      </Switch>
+                  </div>
+              </div>
           </div>
-          <footer className="footer">
-            Copyright@2017 All rights reserved
-          </footer>
+          <div className="footer-wrapper">
+            <footer className="footer">
+              Copyright@2017 All rights reserved
+            </footer>
+          </div>
         </div>
     );
   }
@@ -36,4 +47,4 @@ class App extends Component {
 App.propTypes = {
     initialData: PropTypes.object.isRequired
 }
-export default App;
+export default withRouter(App);

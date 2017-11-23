@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { getQAs } from 'actions/qa';
 import QAitem from 'components/qa-item/QAitem';
+import './QA.css'
 
 class QA extends Component {
 
@@ -58,13 +59,16 @@ class QA extends Component {
             *
             *
             * */
-            <main role="main">
-                {
-                    this.state.qas.map((qa,id) => {
-                        return <QAitem qa={qa} key={id}/>
-                    })
-                }
-            </main>
+            <div className="qa">
+                <img src={require('assets/img/blue.jpg')} alt="main" />
+                <main role="main">
+                    {
+                        this.state.qas.map((qa,id) => {
+                            return <QAitem qa={qa} key={id}/>
+                        })
+                    }
+                </main>
+            </div>
         )
     }
 }

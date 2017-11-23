@@ -1,16 +1,67 @@
 @import 'assets/variables.scss';
 
-.page-wrapper {
-  min-height: 100%;
-  margin: 0 auto;
-  width: $content-width;
+.page {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  min-height: 100%;
+  width: 100%;
+  overflow-x: visible;
 }
 
 .content {
   flex: 1;
+  background-color: $color-bg;
 }
 
+
+.nav-bar-wrapper {
+  max-width: 100%;
+  background-color: $color-primary;
+  height: $nav-bar-height;
+  a { color: white; }
+}
+
+.nav-bar {
+  width: $content-width;
+  margin: 0 auto;
+  font-size: 1.5rem;
+
+  &__links {
+    height: $nav-bar-height;
+  }
+
+  &__link {
+    display: inline-block;
+    height: $nav-bar-height;
+    margin-right: 1px;
+    padding: 0 12px;
+    &:hover, &--chosen {
+      background-color: #5e6874;
+      border-bottom: 3px solid #85acdd;
+    }
+  }
+}
+
+
+.main-wrapper {
+  max-width: 100%;
+  background-color: $color-bg;
+}
+
+.main {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 20px 0 40px;
+}
+
+.footer-wrapper {
+  max-width: 100%;
+  border-top: 1px solid #dfe1e8;
+}
 .footer {
+  width: $content-width;
+  margin: 0 auto;
+  font-size: 0.8rem;
+  text-align: center;
 }

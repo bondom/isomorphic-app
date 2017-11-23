@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import 'assets/styles/global.css';
 import App from 'components/layout/App';
 import registerServiceWorker from './registerServiceWorker';
+import WebFont from 'webfontloader';
+import { BrowserRouter } from 'react-router-dom'
 
-import {
-    BrowserRouter
-} from 'react-router-dom'
+WebFont.load({
+    google: {
+        families: ['PT Sans', 'sans-serif']
+    }
+});
 
 const initialData = window.__INITIAL_DATA__;
 

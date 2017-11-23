@@ -1,0 +1,36 @@
+@import 'assets/variables.scss';
+
+$border-color: #b9ceea;
+$background-color: #eaeaf8;
+
+
+.qa-item {
+  display: block;
+  &__question {
+    height: 50px;
+    width: 100%;
+    border: 0px;
+    border-left: 3px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    padding: 10px;
+
+    background-color: $background-color;
+    outline: none;
+    text-align: left;
+    &:hover {
+      cursor: pointer;
+    }
+    > h2 {
+      font-weight: normal;
+    }
+  }
+
+  &__answer {
+    display: none;
+    font-size: 0.9em;
+    &--opened {
+      display: block;
+      padding-left:20px;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.qa-item {
+  display: block; }
+  .qa-item__question {
+    height: 50px;
+    width: 100%;
+    border: 0px;
+    border-left: 3px solid #b9ceea;
+    border-bottom: 1px solid #b9ceea;
+    padding: 10px;
+    background-color: #eaeaf8;
+    outline: none;
+    text-align: left; }
+    .qa-item__question:hover {
+      cursor: pointer; }
+    .qa-item__question > h2 {
+      font-weight: normal; }
+  .qa-item__answer {
+    display: none;
+    font-size: 0.9em; }
+    .qa-item__answer--opened {
+      display: block;
+      padding-left: 20px; }
