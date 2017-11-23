@@ -1,3 +1,5 @@
+@import 'assets/variables.scss';
+
 /*Reset*/
 * {
   /*border and padding will be included in width and height of elements*/
@@ -42,22 +44,6 @@ p, h1, h2, h3, h4, h5, h6  {
 #root {
   height:100%;
 }
-
-.page-wrapper {
-  min-height: 100%;
-  margin: 0 auto;
-  width: 980px;
-  display: flex;
-  flex-direction: column;
-}
-
-.content {
-  flex: 1;
-}
-
-.footer {
-}
-
 /*
 1. Reset
 2. Em, rem,

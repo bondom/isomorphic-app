@@ -1,0 +1,9 @@
+.page-wrapper {
+  min-height: 100%;
+  margin: 0 auto;
+  width: 980px;
+  display: flex;
+  flex-direction: column; }
+
+.content {
+  flex: 1; }

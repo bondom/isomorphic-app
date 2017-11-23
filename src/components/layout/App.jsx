@@ -6,7 +6,8 @@ import {
     Link
 } from 'react-router-dom';
 import QA from 'pages/qa/QA';
-import About from 'pages/about/About';
+import About from 'pages/about/About.jsx';
+import './App.css';
 
 class App extends Component {
   render() {

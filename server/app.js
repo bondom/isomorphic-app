@@ -4,7 +4,7 @@ const React = require('react');
 const fs = require('fs')
 const ReactDOMServer = require('react-dom/server');
 const { StaticRouter } = require('react-router-dom');
-const {default: App} = require('../src/App');
+const {default: App} = require('../src/components/layout/App');
 const {default: render} = require('./render'); //TODO: delete or adopt
 
 

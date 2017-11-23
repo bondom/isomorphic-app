@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "build-css": "^0.2.0",
     "cross-env": "^5.1.1",
     "ignore-styles": "^5.0.1",
+    "node-sass-chokidar": "0.0.3",
+    "npm-run-all": "^4.1.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
@@ -12,9 +15,12 @@
     "serialize-javascript": "^1.4.0"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=./src react-scripts start",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "cross-env NODE_PATH=./src PORT=3002 npm-run-all -p watch-css start-js",
     "start:server": "cross-env NODE_ENV=development NODE_PATH=./src nodemon --watch server --watch build server",
-    "build": "cross-env NODE_PATH=./src react-scripts build",
+    "build": "npm run build-css && cross-env NODE_PATH=./src react-scripts build",
     "test": "cross-env NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
