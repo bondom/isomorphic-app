@@ -1,26 +1,37 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { getQAs } from 'actions/qa';
-import QAitem from 'components/qa-item/QAitem';
+import QAitem from 'components/widgets/qa-item/QAitem';
 import './QA.css'
+import NewQA from "components/widgets/new-qa/NewQA";
 
 class QA extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {qas: []};
+        this.state = {newQAOpen: false};
+        this.toggleNewQA = this.toggleNewQA.bind(this);
+        this.onNewQAConfirm = this.onNewQAConfirm.bind(this);
     }
 
-    componentWillMount() {
+/*    componentWillMount() {
         if(this.props.initialQAs) {
             this.setState({qas: this.props.initialQAs.slice()});
             console.log("Data were retrieved from server");
             return;
         }
+    }*/
+
+    toggleNewQA() {
+        this.setState((prevState) => {
+            return {
+                newQAOpen: !prevState.newQAOpen
+            }
+        });
     }
 
-    componentDidMount() {
-        this.setState({qas: getQAs()});
+    onNewQAConfirm(qa) {
+        this.toggleNewQA();
+        this.props.createQA(qa);
     }
 
     render() {
@@ -61,9 +72,14 @@ class QA extends Component {
             * */
             <div className="qa">
                 <img src={require('assets/img/blue.jpg')} alt="main" />
-                <main role="main">
+                <main role="main" className="qa-content">
+                    { !this.state.newQAOpen
+                        ? <button className="add-btn" onClick={this.toggleNewQA}>Add</button>
+                        : null
+                    }
+                    {this.state.newQAOpen ? <NewQA hide={this.toggleNewQA} create={this.onNewQAConfirm}/> : null}
                     {
-                        this.state.qas.map((qa,id) => {
+                        this.props.initialQAs.map((qa,id) => {
                             return <QAitem qa={qa} key={id}/>
                         })
                     }
@@ -74,6 +90,7 @@ class QA extends Component {
 }
 
 QA.propTypes = {
-    initialQAs: PropTypes.array
+    initialQAs: PropTypes.array.isRequired,
+    createQA: PropTypes.func.isRequired
 };
 export default QA;

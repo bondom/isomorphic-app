@@ -2,3 +2,20 @@
   max-width: 980px; }
   .qa > img {
     max-width: 980px; }
+
+.main__buttons {
+  align-self: flex-end; }
+
+.qa-content {
+  display: flex;
+  flex-direction: column; }
+
+.add-btn {
+  border: 0;
+  background: #2a3440;
+  color: #cabbb3;
+  padding: 5px 10px;
+  margin-bottom: 4px;
+  margin-left: 6px;
+  cursor: pointer;
+  align-self: flex-end; }

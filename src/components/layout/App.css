@@ -13,21 +13,24 @@
 .nav-bar-wrapper {
   max-width: 100%;
   background-color: #2a3440;
-  height: 45px; }
+  height: 50px; }
   .nav-bar-wrapper a {
-    color: white; }
+    color: #dadae3; }
 
 .nav-bar {
   width: 980px;
   margin: 0 auto;
-  font-size: 1.5rem; }
+  font-size: 1rem; }
   .nav-bar__links {
-    height: 45px; }
+    height: 50px; }
+    .nav-bar__links > li {
+      display: inline-block; }
   .nav-bar__link {
     display: inline-block;
-    height: 45px;
+    height: 50px;
     margin-right: 1px;
-    padding: 0 12px; }
+    padding: 10px 12px 12px;
+    color: #dadae3; }
     .nav-bar__link:hover, .nav-bar__link--chosen {
       background-color: #5e6874;
       border-bottom: 3px solid #85acdd; }

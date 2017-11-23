@@ -19,23 +19,27 @@
   max-width: 100%;
   background-color: $color-primary;
   height: $nav-bar-height;
-  a { color: white; }
+  a { color: #dadae3; }
 }
 
 .nav-bar {
   width: $content-width;
   margin: 0 auto;
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   &__links {
     height: $nav-bar-height;
+    > li {
+      display: inline-block;
+    }
   }
 
   &__link {
     display: inline-block;
     height: $nav-bar-height;
     margin-right: 1px;
-    padding: 0 12px;
+    padding: 10px 12px 12px;
+    color: #dadae3;
     &:hover, &--chosen {
       background-color: #5e6874;
       border-bottom: 3px solid #85acdd;

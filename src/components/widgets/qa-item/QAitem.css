@@ -13,10 +13,13 @@
     .qa-item__question:hover {
       cursor: pointer; }
     .qa-item__question > h2 {
-      font-weight: normal; }
+      font-weight: normal;
+      color: #7ba4db; }
   .qa-item__answer {
-    display: none;
-    font-size: 0.9em; }
+    transition: max-height 500ms linear 0ms;
+    max-height: 0px;
+    overflow: hidden;
+    font-size: 0.9em;
+    padding-left: 20px; }
     .qa-item__answer--opened {
-      display: block;
-      padding-left: 20px; }
+      max-height: 500px; }
