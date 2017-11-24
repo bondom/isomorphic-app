@@ -4,6 +4,7 @@ import QAitem from 'components/widgets/qa-item/QAitem';
 import './QA.css'
 import NewQA from "components/widgets/new-qa/NewQA";
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper'
+import {CSSTransitionGroup} from 'react-transition-group'
 
 class QA extends Component {
 
@@ -74,11 +75,27 @@ class QA extends Component {
             <div className="qa">
                 <img src={require('assets/img/blue.jpg')} alt="main" />
                 <main role="main" className="qa-content">
-                    { !this.state.newQAOpen
-                        ? <button className="add-btn" onClick={this.toggleNewQA}>Add</button>
-                        : null
-                    }
+
+                    <CSSTransitionGroup
+                        transitionName="add-btn-transition"
+                        transitionEnterTimeout={1000}
+                        transitionLeaveTimeout={10}>
+                            { !this.state.newQAOpen
+                                ? <button className="add-btn" onClick={this.toggleNewQA}>Add</button>
+                                : null
+                            }
+                    </CSSTransitionGroup>
+
+
+                    <CSSTransitionGroup
+                        transitionName="qa-answer-transition"
+                        transitionAppear={true}
+                        transitionAppearTimeout={500}
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+
                     {this.state.newQAOpen ? <NewQA hide={this.toggleNewQA} create={this.onNewQAConfirm}/> : null}
+                    </CSSTransitionGroup>
                     {
                         this.props.initialQAs.map((qa,id) => {
                             return <QAitem qa={qa} key={id}/>

@@ -17,6 +17,10 @@
 .qa-content {
   display: flex;
   flex-direction: column;
+  & > span:first-child {
+    display: block;
+    align-self: flex-end;
+  }
 }
 
 
@@ -29,4 +33,25 @@
   margin-left: 6px;
   cursor: pointer;
   align-self: flex-end;
+}
+
+.add-btn-transition-enter {
+  opacity: 0.01;
+  //max-height: 0;
+}
+
+.add-btn-transition-enter.add-btn-transition-enter-active {
+  opacity: 1;
+  //max-height: 500px;
+  transition: opacity 0ms ease-in 500ms/* max-height 0ms ease-in 500ms;*/
+}
+
+.add-btn-transition-leave {
+  opacity: 1;
+  //max-height: 500px;
+}
+
+.add-btn-transition-leave.add-btn-transition-leave-active {
+  opacity: 0.01;
+  //max-height: 0;
 }
