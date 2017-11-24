@@ -16,10 +16,37 @@
       font-weight: normal;
       color: #7ba4db; }
   .qa-item__answer {
-    transition: max-height 500ms linear 0ms;
-    max-height: 0px;
+    max-height: 500px;
     overflow: hidden;
     font-size: 0.9em;
     padding-left: 20px; }
     .qa-item__answer--opened {
       max-height: 500px; }
+
+.qa-answer-transition-enter {
+  opacity: 0.01;
+  max-height: 0; }
+
+.qa-answer-transition-enter.qa-answer-transition-enter-active {
+  opacity: 1;
+  max-height: 500px;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in; }
+
+.qa-answer-transition-leave {
+  opacity: 1;
+  max-height: 500px; }
+
+.qa-answer-transition-leave.qa-answer-transition-leave-active {
+  opacity: 0.01;
+  max-height: 0;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in; }
+
+/*
+.qa-answer-transition-appear {
+  opacity: 0.01;
+}
+
+.qa-answer-transition-appear.qa-answer-transition-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}*/

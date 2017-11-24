@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-
 import {CSSTransitionGroup} from 'react-transition-group'
+
+import './TransitionWrapper.css';
+
 
 const TransitionWrapper = (WrappedComponent) => {
 
@@ -9,7 +11,7 @@ const TransitionWrapper = (WrappedComponent) => {
         render() {
             return (
                 <CSSTransitionGroup
-                    transitionName="example"
+                    transitionName="page"
                     transitionAppear={true}
                     transitionAppearTimeout={500}
                     transitionEnterTimeout={500}

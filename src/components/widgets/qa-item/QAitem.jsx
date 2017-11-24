@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './QAitem.css';
+import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
+import {CSSTransitionGroup} from 'react-transition-group'
 
 class QAitem extends Component {
     constructor(props) {
@@ -17,14 +19,22 @@ class QAitem extends Component {
         })
     }
 
+
     render() {
         const qa = this.props.qa;
         return (
             <div className="qa-item">
                 <button className="qa-item__question" onClick={this.onAnswerToggle}><h2>{qa.question}</h2></button>
-                <div className={`qa-item__answer${this.state.showAnswer ? ' qa-item__answer--opened' : ''}`}>
-                    {qa.answer}
-                </div>
+                <CSSTransitionGroup
+                    transitionName="qa-answer-transition"
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    {this.state.showAnswer ? <div className={`qa-item__answer`}>
+                        {qa.answer}
+                    </div> : null}
+                </CSSTransitionGroup>
             </div>
         )
     }
