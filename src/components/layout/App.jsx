@@ -11,6 +11,7 @@ import { getQAs } from 'actions/qa';
 import About from 'pages/about/About';
 import TodoList from 'pages/todo-list/TodoList'
 import './App.css';
+//import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 
 class App extends Component {
     constructor(props) {
@@ -50,10 +51,14 @@ class App extends Component {
                     <div className="main-wrapper">
                         <div className="main">
                             <Switch>
-                                <Route exact path="/"
-                                       render={() => <QA initialQAs={this.state.qas} createQA={this.addQA}/>}/>
+                                {/*<TransitionWrapper exact path="/" component={QA}
+                                                 componentProps={{initialQAs: this.state.qas, createQA: this.addQA}}/>
+                                <TransitionWrapper path="/about" component={About}/>
+                                <TransitionWrapper path="/training" component={TodoList}/>*/}
+                                <Route exact path="/" render={(props) => <QA {...props} initialQAs={this.state.qas} createQA={this.addQA}/>}/>
                                 <Route path="/about" component={About}/>
                                 <Route path="/training" component={TodoList}/>
+
                             </Switch>
                         </div>
                     </div>

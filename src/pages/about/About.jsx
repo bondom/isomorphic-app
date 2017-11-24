@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper'
 
 class About extends Component {
     render() {
@@ -13,4 +14,4 @@ class About extends Component {
 
 About.propTypes = {};
 
-export default About;    
+export default TransitionWrapper(About);

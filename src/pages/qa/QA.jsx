@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import QAitem from 'components/widgets/qa-item/QAitem';
 import './QA.css'
 import NewQA from "components/widgets/new-qa/NewQA";
+import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper'
 
 class QA extends Component {
 
@@ -93,4 +94,4 @@ QA.propTypes = {
     initialQAs: PropTypes.array.isRequired,
     createQA: PropTypes.func.isRequired
 };
-export default QA;
+export default TransitionWrapper(QA);

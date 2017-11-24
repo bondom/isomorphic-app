@@ -1,64 +1,47 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import { Transition } from 'react-transition-group'
+import { CSSTransitionGroup  } from 'react-transition-group'
+import './TodoList.css';
+class TodoList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {items: ['hello', 'world', 'click', 'me']};
+        this.handleAdd = this.handleAdd.bind(this);
+    }
 
-const duration = 300;
+    handleAdd() {
+        const newItems = this.state.items.concat([
+            prompt('Enter some text')
+        ]);
+        this.setState({items: newItems});
+    }
 
-const defaultStyle = {
-    transition: `height ${duration}ms ease-in-out`,
-    height: 0,
-    display: 'inline-block',
-    backgroundColor: '#8787d8',
-    overflow: 'hidden',
-    boxSizing: 'border-box'
-}
-
-const transitionStyles = {
-    entering: {
-        height: 0
-    },
-    entered: {
-        height: 82
-    },
-};
-
-const Fade = ({ in: inProp }) => (
-    <Transition in={inProp} timeout={duration}>
-        {(state) => (
-            <div style={{
-                ...defaultStyle,
-                ...transitionStyles[state]
-            }}>
-                <div style={{padding: 20}}>
-                    I'm A fade Transition!
-                </div>
-            </div>
-        )}
-    </Transition>
-);
-
-class Example extends React.Component {
-    state = { show: false }
-
-    handleToggle() {
-        this.setState(({ show }) => ({
-            show: !show
-        }))
+    handleRemove(i) {
+        let newItems = this.state.items.slice();
+        newItems.splice(i, 1);
+        this.setState({items: newItems});
     }
 
     render() {
-        const { show } = this.state
+        const items = this.state.items.map((item, i) => (
+            <div key={item} onClick={() => this.handleRemove(i)}>
+                {item}
+            </div>
+        ));
+
         return (
             <div>
-                <button onClick={() => this.handleToggle()}>
-                    Click to toggle
-                </button>
-                <div>
-                    <Fade in={!!show} />
-                </div>
+                <button onClick={this.handleAdd}>Add Item</button>
+                <CSSTransitionGroup
+                    transitionName="example"
+                    //transitionAppear={true}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={1000}>
+                    {items}
+                </CSSTransitionGroup>
             </div>
-        )
+        );
     }
 }
 
-export default Example;
+export default TodoList;
