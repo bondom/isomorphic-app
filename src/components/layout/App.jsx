@@ -9,7 +9,10 @@ import {
 import QA from 'pages/qa/QA.jsx';
 import { getQAs } from 'actions/qa';
 import About from 'pages/about/About';
-import TodoList from 'pages/todo-list/TodoList.jsx' //TODO: doesn't work without .jsx WHY???
+
+//more likely this import doesn't work without extension, because there is ambiguity for node:
+//  several files in one folder, and webpack loader isn't applied to files started outside of src/ folder
+import TodoList from 'pages/todo-list/TodoList.jsx'
 import './App.css';
 
 class App extends Component {

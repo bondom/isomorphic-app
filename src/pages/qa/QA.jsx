@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import QAitem from 'components/widgets/qa-item/QAitem.jsx'; //TODO: doesn't work without .jsx WHY???
+import QAitem from 'components/widgets/qa-item/QAitem.jsx';
 import './QA.css'
-import NewQA from "components/widgets/new-qa/NewQA.jsx"; //TODO: doesn't work without .jsx WHY???
+import NewQA from "components/widgets/new-qa/NewQA.jsx";
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper'
 import {CSSTransitionGroup} from 'react-transition-group'
 import DocumentMeta from "components/widgets/document-meta/DocumentMeta";
