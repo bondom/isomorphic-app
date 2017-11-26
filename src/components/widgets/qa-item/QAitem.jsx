@@ -44,5 +44,4 @@ QAitem.propTypes = {
     qa: PropTypes.object.isRequired
 };
 
-
-export default QAitem;    
+export default QAitem;

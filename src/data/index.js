@@ -26,5 +26,9 @@ export const qa = [
         "The two main ways of implementing HOCs in React: Props Proxy (PP) and Inheritance Inversion (II). Both enable different ways of manipulating the WrappedComponent." +
         "React-Redux - is Props Proxy implementation('connect' function)" +
         "https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e"
+    },
+    {
+        question: "What is robots.txt?",
+        answer: "Robots.txt is a text file webmasters create to instruct web robots (typically search engine robots) how to crawl pages on their website.In practice, robots.txt files indicate whether certain user agents (web-crawling software) can or cannot crawl parts of a website. These crawl instructions are specified by “disallowing” or “allowing” the behavior of certain (or all) user agents."
     }
 ]

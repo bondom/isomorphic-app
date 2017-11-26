@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import QAitem from 'components/widgets/qa-item/QAitem';
+import QAitem from 'components/widgets/qa-item/QAitem.jsx'; //TODO: doesn't work without .jsx WHY???
 import './QA.css'
-import NewQA from "components/widgets/new-qa/NewQA";
+import NewQA from "components/widgets/new-qa/NewQA.jsx"; //TODO: doesn't work without .jsx WHY???
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper'
 import {CSSTransitionGroup} from 'react-transition-group'
+import DocumentMeta from "components/widgets/document-meta/DocumentMeta";
+import { Pages } from 'routes';
+
+
 
 class QA extends Component {
 
@@ -14,14 +18,6 @@ class QA extends Component {
         this.toggleNewQA = this.toggleNewQA.bind(this);
         this.onNewQAConfirm = this.onNewQAConfirm.bind(this);
     }
-
-/*    componentWillMount() {
-        if(this.props.initialQAs) {
-            this.setState({qas: this.props.initialQAs.slice()});
-            console.log("Data were retrieved from server");
-            return;
-        }
-    }*/
 
     toggleNewQA() {
         this.setState((prevState) => {
@@ -73,6 +69,7 @@ class QA extends Component {
             *
             * */
             <div className="qa">
+                <DocumentMeta page={Pages.Main}/>
                 <img src={require('assets/img/blue.jpg')} alt="main" />
                 <main role="main" className="qa-content">
 
@@ -94,7 +91,7 @@ class QA extends Component {
                         transitionEnterTimeout={500}
                         transitionLeaveTimeout={500}>
 
-                    {this.state.newQAOpen ? <NewQA hide={this.toggleNewQA} create={this.onNewQAConfirm}/> : null}
+                        {this.state.newQAOpen ? <NewQA hide={this.toggleNewQA} create={this.onNewQAConfirm}/> : null}
                     </CSSTransitionGroup>
                     {
                         this.props.initialQAs.map((qa,id) => {
@@ -111,4 +108,5 @@ QA.propTypes = {
     initialQAs: PropTypes.array.isRequired,
     createQA: PropTypes.func.isRequired
 };
+
 export default TransitionWrapper(QA);

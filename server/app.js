@@ -4,9 +4,10 @@ const React = require('react');
 const fs = require('fs')
 const ReactDOMServer = require('react-dom/server');
 const { StaticRouter } = require('react-router-dom');
-const {default: App} = require('../src/components/layout/App');
+/*const {default: App} = require('../src/components/layout/App.jsx');*/
+import App from '../src/components/layout/App.jsx'
 const {default: render} = require('./render'); //TODO: delete or adopt
-
+import DocumentMeta from 'react-document-meta';
 
 import { getQAs } from '../src/actions/qa';
 import serialize from 'serialize-javascript'; //to prevent XSS attacks
@@ -27,6 +28,7 @@ const initData = (req,res,next) => {
 }
 
 const universalLoader = (req, res) => {
+    console.log("Server");
     fs.readFile(filePath, 'utf8', (err, htmlData) => {
         if (err) {
             console.error('read err', err);
@@ -34,12 +36,17 @@ const universalLoader = (req, res) => {
         }
 
         const initialData = res.locals.initialData;
+        console.log(App);
         const markup = ReactDOMServer.renderToString(
             <StaticRouter location={req.url} context={{}}>
                 <App initialData={initialData}/>
             </StaticRouter>
         );
-        const replacedHtmlData = htmlData.replace('{{SSR}}', markup).replace(/__INITIAL_DATA__PLACEHOLDER__/g, serialize(initialData));
+        const meta = DocumentMeta.renderAsHTML();
+        const replacedHtmlData = htmlData
+            .replace('{{SSR}}', markup)
+            .replace(/__INITIAL_DATA__PLACEHOLDER__/g, serialize(initialData))
+            .replace('{{META}}', meta);
         res.status(200).send(replacedHtmlData);
     });
 };
