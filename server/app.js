@@ -12,6 +12,8 @@ import DocumentMeta from 'react-document-meta';
 import { getQAs } from '../src/actions/qa';
 import serialize from 'serialize-javascript'; //to prevent XSS attacks
 
+
+
 const app = express();
 
 const filePath = path.resolve(__dirname, '..', 'build', 'index.html');

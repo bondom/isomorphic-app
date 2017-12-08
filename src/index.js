@@ -4,7 +4,10 @@ import 'assets/styles/global.css';
 import App from 'components/layout/App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
+//require('assets/img/blue.jpg');
+
 const initialData = window.__INITIAL_DATA__;
+
 
 delete window.__INITIAL_DATA__;
 
