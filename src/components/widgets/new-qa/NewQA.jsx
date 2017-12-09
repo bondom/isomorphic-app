@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import './NewQA.css';
+import './NewQA.scss';
 
 class NewQA extends Component {
 
@@ -40,4 +40,4 @@ NewQA.propTypes = {
 };
 
 
-export default NewQA;    
+export default NewQA;

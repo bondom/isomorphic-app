@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import './QAitem.css';
+import './QAitem.scss';
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 import {CSSTransitionGroup} from 'react-transition-group'
 

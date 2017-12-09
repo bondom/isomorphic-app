@@ -4,16 +4,45 @@ const React = require('react');
 const fs = require('fs')
 const ReactDOMServer = require('react-dom/server');
 const { StaticRouter } = require('react-router-dom');
-/*const {default: App} = require('../src/components/layout/App.jsx');*/
-import App from '../src/components/layout/App.jsx'
-const {default: render} = require('./render'); //TODO: delete or adopt
+const App = require('../src/components/layout/App.jsx').default;
+//const {default: render} = require('./render'); //TODO: delete or adopt
+/*
 import DocumentMeta from 'react-document-meta';
 
 import { getQAs } from '../src/actions/qa';
 import serialize from 'serialize-javascript'; //to prevent XSS attacks
+*/
+
+module.exports = function serverRenderer() {
 
 
 
+    return (req, res, next) => {
+        console.log("Before");
+        const markup = ReactDOMServer.renderToString(
+            <StaticRouter location={req.url} context={{}}>
+                <App initialData={{}}/>
+            </StaticRouter>
+        );
+        console.log("Markup: " + markup);
+        res.status(200).send(`
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <meta charset="utf-8">
+                    <title>User Profile</title>
+                </head>
+                <body>
+            
+                    <div id="root"></div>
+            
+                </body>
+            </html>
+        `);
+    };
+}
+
+/*
 const app = express();
 
 const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
@@ -55,9 +84,9 @@ const universalLoader = (req, res) => {
 
 //if we don't want to use ssr,
 //just ensures that refreshing pages with paths different from root one will return page
-/*app.get('/!*', function (req, res) {
+/!*app.get('/!*', function (req, res) {
     res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-});*/
+});*!/
 
 
 //handle root url, if don't do this before static resources, page from build folder(just SPA) will be returned for root url
@@ -75,4 +104,4 @@ initData,
 universalLoader) ;
 
 
-module.exports = app;
+module.exports = app;*/

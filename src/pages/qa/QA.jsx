@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import QAitem from 'components/widgets/qa-item/QAitem.jsx';
-import './QA.css'
+import './QA.scss'
 import NewQA from "components/widgets/new-qa/NewQA.jsx";
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper'
 import {CSSTransitionGroup} from 'react-transition-group'

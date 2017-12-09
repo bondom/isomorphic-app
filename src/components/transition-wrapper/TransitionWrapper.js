@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {CSSTransitionGroup} from 'react-transition-group'
 
-import './TransitionWrapper.css';
+import './TransitionWrapper.scss';
 
 
 const TransitionWrapper = (WrappedComponent) => {

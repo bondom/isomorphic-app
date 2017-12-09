@@ -13,7 +13,7 @@ import About from 'pages/about/About';
 //more likely this import doesn't work without extension, because there is ambiguity for node:
 //  several files in one folder, and webpack loader isn't applied to files started outside of src/ folder
 import TodoList from 'pages/todo-list/TodoList.jsx'
-import './App.css';
+import './App.scss';
 
 class App extends Component {
     constructor(props) {
@@ -52,12 +52,12 @@ class App extends Component {
                     </div>
                     <div className="main-wrapper">
                         <div className="main">
-                            <Switch>
+{/*                            <Switch>
                                 <Route exact path="/" render={(props) => <QA {...props} initialQAs={this.state.qas} createQA={this.addQA}/>}/>
                                 <Route path="/about" component={About}/>
                                 <Route path="/training" component={TodoList}/>
 
-                            </Switch>
+                            </Switch>*/}
                         </div>
                     </div>
                 </div>

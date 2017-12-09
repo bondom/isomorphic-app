@@ -1,20 +1,21 @@
 
-//ignore style imports for babel-register hook
-require('ignore-styles');
+const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const devConfig = require('../webpack.dev.js');
 
-//'require' hook, it is bound to node's 'require' and automatically compiles files on the fly
-require('babel-register')({
-    ignore: /\/(build|node_modules)\//,
-    //get two presets from babel-preset-react-app
-    //env - latest js features(like import)
-    //react - allows jsx
-    //TODO: works also if react-app is specified, why???
-    presets: ['env', 'react']
-})
+const app = express();
+//import serverRenderer from './app.jsx';
 
 
-const app = require('./app');
-const PORT = 3002;
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}!`);
-});
+const compiler= webpack(devConfig);
+
+app.use(webpackDevMiddleware(compiler, {
+    serverSideRender: true
+}));
+app.use(webpackHotServerMiddleware(compiler));
+
+
+//app.use(serverRenderer());
+app.listen(6060);
