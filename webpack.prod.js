@@ -1,12 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
-
-
 
 const prodConfig = merge(commonConfig, {
         devtool: "source-map", //takes some memory, but useful for debugging
@@ -18,25 +14,17 @@ const prodConfig = merge(commonConfig, {
         plugins: [
             new webpack.HashedModuleIdsPlugin(),
 
-
-            //order matters, vendor should be before runtime
             new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor' //chunk with libraries, that more likely will no be changed a lot of time
+                name: 'vendor'
             }),
             new webpack.optimize.CommonsChunkPlugin({
-                name: 'runtime' // this name isn't specified in the entry configuration =>
-                                //runtime.bundle.js will contain webpack's boilerplate and manifest which can change with every build
+                name: 'runtime'
             }),
             new UglifyJSPlugin({
                 sourceMap: true
-            }),
-            new HtmlWebpackPlugin({
-                template: path.resolve(__dirname, 'src', 'index-t.ejs'),
-                filename: 'index.html'
             })
         ]
 });
 
-//console.log(JSON.stringify(prodConfig, null, 4));
 module.exports = prodConfig;
 

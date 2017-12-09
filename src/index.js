@@ -5,7 +5,6 @@ import App from 'components/layout/App';
 import { BrowserRouter } from 'react-router-dom'
 
 console.log("Client ssd");
-//require('assets/img/blue.jpg');
 
 /*const initialData = window.__INITIAL_DATA__;
 

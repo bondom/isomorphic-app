@@ -3,11 +3,11 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === "development";
 const extractSass = new ExtractTextPlugin({
-    filename: `assets/css/style${isDev ? '' : '.[chunkhash]'}.css`/*,
-    disable: isDev*/
+    filename: `assets/css/style${isDev ? '' : '.[chunkhash]'}.css`
 });
 
 
@@ -37,9 +37,7 @@ module.exports = {
                             options: {
                                 includePaths: ["src"]
                             }
-                        }],
-                        /*// use style-loader in development
-                        fallback: "style-loader" // creates style nodes from JS strings(Adds CSS to the DOM by injecting a <style> tag)*/
+                        }]
                     })
                 },
 /*                {
@@ -59,9 +57,8 @@ module.exports = {
                     ],
                     loader: "babel-loader",
                     options: {
-                        //modules is false to avoid converting static ES6 import and export into dynamic ones => Tree Shaking works
                         presets: [["react"], ["es2015", {modules: false}]],
-                        babelrc: false //to get rid of using .babelrc file that is used by jest
+                        babelrc: false
                     }
                 },
                 {
@@ -86,7 +83,11 @@ module.exports = {
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }),
             extractSass,
-            new IsomorphicLoaderPlugin()
+            new IsomorphicLoaderPlugin(),
+            new HtmlWebpackPlugin({
+                template: 'index.ejs',
+                filename: 'index-template.html'
+            })
 
         ]
 
