@@ -52,12 +52,12 @@ class App extends Component {
                     </div>
                     <div className="main-wrapper">
                         <div className="main">
-{/*                            <Switch>
+                            <Switch>
                                 <Route exact path="/" render={(props) => <QA {...props} initialQAs={this.state.qas} createQA={this.addQA}/>}/>
                                 <Route path="/about" component={About}/>
                                 <Route path="/training" component={TodoList}/>
 
-                            </Switch>*/}
+                            </Switch>
                         </div>
                     </div>
                 </div>

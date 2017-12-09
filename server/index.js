@@ -1,21 +1,24 @@
+//const express = require('express');
+import React from 'react';
+import express from 'express';
+import App from '../src/components/layout/App.jsx';
+import { StaticRouter } from 'react-router-dom'
+import { renderToString } from 'react-dom/server';
+import render from "./render";
+import 'assets/styles/global.scss';
 
-const express = require('express');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const devConfig = require('../webpack.dev.js');
 
 const app = express();
-//import serverRenderer from './app.jsx';
+app.use(express.static('./build'));
+app.use((req,res) => {
+    const html = renderToString(
+        <StaticRouter location={req.url} context={{}}>
+            <App initialData={{}}/>
+        </StaticRouter>
+    );
+    res.status(200).send(render(html));
+})
 
-
-const compiler= webpack(devConfig);
-
-app.use(webpackDevMiddleware(compiler, {
-    serverSideRender: true
-}));
-app.use(webpackHotServerMiddleware(compiler));
-
-
-//app.use(serverRenderer());
-app.listen(6060);
+app.listen(6060, () => {
+    console.log("Listening");
+});
