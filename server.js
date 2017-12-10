@@ -5,9 +5,8 @@ require("babel-register")({
     presets: ['env', 'react']
 });
 
-/*
 require('babel-polyfill');
-*/
+
 
 var extendRequire = require("isomorphic-loader/lib/extend-require");
 

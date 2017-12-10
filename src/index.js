@@ -5,6 +5,9 @@ import App from 'components/layout/App';
 import { BrowserRouter } from 'react-router-dom'
 
 
+//experimental autobinding: https://babeljs.io/docs/plugins/transform-class-properties/
+
+
 /*const initialData = window.__INITIAL_DATA__;
 
 
