@@ -1,4 +1,4 @@
-## There are 3 branches:
+## There are 4 branches:
 
 ### master: create-react-app + ssr (now works in both dev and prod modes)
 <br>Disadvantages: 
@@ -10,7 +10,7 @@ starting both ssr and spa
 webpack --watch with nodemon are used.
 <br>Disadvantages: 
 - impossible apply hot reloading for all files(also for css) when starting both ssr and spa - need to do manual refreshing of browser
-<b>NOTE</b>: but hot reloading works fine when starting only client
+<br><b>NOTE</b>: but hot reloading works fine when starting only client
 
 ### ssr-with-custom-config: custom config + ssr (to be implemented)
 webpack-dev-middleware and webpack-hot-middleware are used
