@@ -6,6 +6,7 @@ import {
     Link,
     withRouter
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import QA from 'pages/qa/QA.jsx';
 import { getQAs } from 'actions/qa';
 import About from 'pages/about/About';
@@ -23,10 +24,8 @@ class App extends Component {
     }
 
     componentWillMount() {
-        const qas = this.props.initialData.qas || getQAs();
-        if (qas) {
-            this.setState({qas: qas.slice()});
-        }
+        const qas = getQAs();
+        this.setState({qas: qas.slice()});
     }
 
     addQA(qa) {
@@ -47,6 +46,7 @@ class App extends Component {
                                 <li><Link className={linkClassName("/")} to="/">Home</Link></li>
                                 <li><Link to="/about" className={linkClassName("/about")}>About</Link></li>
                                 <li><Link to="/training" className={linkClassName("/training")}>Training</Link></li>
+                                Counter: {this.props.counter}
                             </ul>
                         </nav>
                     </div>
@@ -56,7 +56,6 @@ class App extends Component {
                                 <Route exact path="/" render={(props) => <QA {...props} initialQAs={this.state.qas} createQA={this.addQA}/>}/>
                                 <Route path="/about" component={About}/>
                                 <Route path="/training" component={TodoList}/>
-
                             </Switch>
                         </div>
                     </div>
@@ -72,6 +71,18 @@ class App extends Component {
 }
 
 App.propTypes = {
-    initialData: PropTypes.object.isRequired
+    counter: PropTypes.number.isRequired
 }
-export default withRouter(App);
+
+const mapStateToProps = state => {
+    return {
+        counter: state.test.counter
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
