@@ -4,7 +4,6 @@ import 'assets/styles/global.scss';
 import App from 'components/layout/App';
 import { BrowserRouter } from 'react-router-dom'
 
-console.log("Client ssd");
 
 /*const initialData = window.__INITIAL_DATA__;
 
@@ -21,3 +20,11 @@ const render = (Component) => {
 }
 
 render(App);
+
+
+if(module.hot) {
+    module.hot.accept('components/layout/App', () => {
+        const NextApp = require('components/layout/App').default;
+        render(NextApp);
+    })
+}

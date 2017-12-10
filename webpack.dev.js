@@ -4,6 +4,16 @@ const path = require('path');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const commonConfig = require('./webpack.common.js');
 
+const startOnlyClient = process.env.BUILD_TYPE === "client";
+
+function StubPlugin(options){};
+StubPlugin.prototype.apply = (compiler) => {
+    compiler.plugin('after-emit', (compilation, callback) => {
+        console.log('Started only client side');
+        callback();
+    });
+};
+
 const merged = merge(commonConfig, {
     devtool: "cheap-module-eval-source-map",
     plugins: [
@@ -12,10 +22,11 @@ const merged = merge(commonConfig, {
             minChunks: Infinity
         }),
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new WebpackShellPlugin({
-            onBuildEnd: [`cross-env NODE_ENV=development NODE_PATH=./src nodemon --watch server server`]
-        }),
+        !startOnlyClient
+            ? new WebpackShellPlugin({
+                onBuildEnd: [`cross-env NODE_ENV=development NODE_PATH=./src nodemon --watch server --watch build server`]
+            })
+            : new StubPlugin()
     ]
 });
 

@@ -5,9 +5,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const startOnlyClient = process.env.BUILD_TYPE === "client";
 const isDev = process.env.NODE_ENV === "development";
 const extractSass = new ExtractTextPlugin({
-    filename: `assets/css/style${isDev ? '' : '.[chunkhash]'}.css`
+    filename: `assets/css/style${isDev ? '' : '.[chunkhash]'}.css`,
+    disable: isDev
 });
 
 
@@ -37,7 +39,8 @@ module.exports = {
                             options: {
                                 includePaths: ["src"]
                             }
-                        }]
+                        }],
+                        fallback: "style-loader"
                     })
                 },
 /*                {
@@ -86,7 +89,7 @@ module.exports = {
             new IsomorphicLoaderPlugin(),
             new HtmlWebpackPlugin({
                 template: 'index.ejs',
-                filename: 'index-template.html'
+                filename: startOnlyClient ? 'index.html' : 'index-template.html'
             })
 
         ]
