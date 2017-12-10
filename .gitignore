@@ -24,3 +24,4 @@ yarn-error.log*
 isomorphic-app.iml
 yarn.lock
 *.css
+.isomorphic-loader-config.json
