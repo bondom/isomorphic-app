@@ -6,16 +6,19 @@ const IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === "development";
+console.log("isDev:" + isDev);
 const extractSass = new ExtractTextPlugin({
-    filename: `assets/css/style${isDev ? '' : '.[chunkhash]'}.css`
+    filename: `assets/css/style${isDev ? '' : '.[chunkhash]'}.css`,
+    disable: isDev
 });
 
 
 module.exports = {
         context: path.resolve(__dirname, 'src'),
-        entry: {
-            client: "./index.js"
-        },
+        entry: [
+            "./index.js",
+            "webpack-hot-middleware/client"
+        ],
         output: {
             path: path.join(__dirname, "/build"),
             filename: `[name]${isDev ? '' : '.[chunkhash]'}.js`,
@@ -37,7 +40,8 @@ module.exports = {
                             options: {
                                 includePaths: ["src"]
                             }
-                        }]
+                        }],
+                        fallback: "style-loader"
                     })
                 },
 /*                {
@@ -78,7 +82,7 @@ module.exports = {
             ]
         },
         plugins: [
-            new CleanWebpackPlugin(['build']),
+            /*new CleanWebpackPlugin(['build']),*/
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }),
@@ -86,7 +90,7 @@ module.exports = {
             new IsomorphicLoaderPlugin(),
             new HtmlWebpackPlugin({
                 template: 'index.ejs',
-                filename: 'index-template.html'
+                filename: 'index.html'
             })
 
         ]

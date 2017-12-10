@@ -9,6 +9,8 @@ require("babel-register")({
 require('babel-polyfill');
 */
 
+require('./server/index.js');
+/*
 var extendRequire = require("isomorphic-loader/lib/extend-require");
 
 extendRequire(function (err) {
@@ -19,3 +21,4 @@ extendRequire(function (err) {
     }
 });
 
+*/

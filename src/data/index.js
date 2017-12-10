@@ -1,5 +1,5 @@
 export const qa = [
-    {question: "What is isomorphic app?", answer: "Application which run both client-side and server-side"},
+    {question: "What is isomorphic app?&&&", answer: "Application which run both client-side and server-side"},
     {
         question: "What's the difference between SCSS and Sass?",
         answer: "Sass is a CSS pre-processor with syntax advancements There are two syntaxes available for Sass. The first, known as SCSS (Sassy CSS) and used throughout this reference, is an extension of the syntax of CSS. This means that every valid CSS stylesheet is a valid SCSS file with the same meaning. This syntax is enhanced with the Sass features described below. Files using this syntax have the .scss extension.\n" +

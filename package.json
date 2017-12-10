@@ -14,9 +14,11 @@
     "serialize-javascript": "^1.4.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack --config webpack.dev.js --watch",
+    "start": "cross-env NODE_ENV=development webpack --config webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js -p",
-    "prod": "cross-env-shell NODE_ENV=production npm run build && cross-env NODE_PATH=./src node server.js"
+    "prod": "cross-env-shell NODE_ENV=production npm run build && cross-env NODE_PATH=./src node server.js",
+    "start-dev": "npm run start && cross-env NODE_ENV=development NODE_PATH=./src nodemon server.js",
+    "start-hmr": "cross-env NODE_ENV=production NODE_PATH=./src node server.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -43,6 +45,8 @@
     "style-loader": "^0.19.0",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "webpack": "^3.8.1",
+    "webpack-dev-middleware": "^1.12.2",
+    "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "^4.1.1",
     "webpack-shell-plugin": "^0.5.0"
   }

@@ -21,3 +21,12 @@ const render = (Component) => {
 }
 
 render(App);
+
+if (module.hot) {
+    console.log("Hot reloading!!!!");
+    module.hot.accept('components/layout/App', () => {
+        console.log("Hot reloadingasd");
+        const NextApp = require('components/layout/App').default;
+        render(NextApp);
+    })
+}
